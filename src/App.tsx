@@ -10,6 +10,10 @@ function App() {
     try {
       e.preventDefault();
 
+      if(newTodo.trim() === "") {
+        return;
+      }
+
       setTodoData((prev) => {
         const newTodoList = [...prev.todo];
 
@@ -33,17 +37,17 @@ function App() {
         onSubmit = {handleSubmit} 
         className = "flex flex-col items-center sm:flex-row sm:justify-center gap-5 mb-12"
       >
-          <input 
-            className = "w-11/12 sm:w-[400px] py-3 px-5 text-black-400 outline-0 rounded-md" 
-            type = "text"
-            value = {newTodo}
-            onChange = {(e) => setNewTodo(e.target.value)}
-          />
+        <input 
+          className = "w-11/12 sm:w-[400px] py-3 px-5 text-black-400 outline-0 rounded-md" 
+          type = "text"
+          value = {newTodo}
+          onChange = {(e) => setNewTodo(e.target.value)}
+        />
 
-          <button 
-            className = "w-1/2 sm:w-auto bg-white-100 text-black-400 py-3 px-5 rounded-md font-semibold" 
-            type = "submit"
-          >Create Todo</button>
+        <button 
+          className = "w-1/2 sm:w-auto bg-white-100 text-black-400 py-3 px-5 rounded-md font-semibold" 
+          type = "submit"
+        >Create Todo</button>
       </form>
       
       <div className = "flex justify-center gap-5 w-11/12 mx-auto flex-wrap">
