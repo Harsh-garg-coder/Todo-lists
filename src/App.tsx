@@ -104,7 +104,7 @@ function App() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className = "bg-black-400 text-white-200 min-h-screen pt-12">
+      <div className = "bg-black-400 text-white-200 min-h-screen py-12">
         <form 
           onSubmit = {handleSubmit} 
           className = "w-11/12 max-w-[700px] flex flex-col items-center sm:flex-row sm:justify-center gap-5 mb-12 border-2 border-white-300 mx-auto p-5 rounded-md"
