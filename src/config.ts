@@ -1,14 +1,33 @@
 export const data = {
     todo: [
-        "create a portfolio",
-        "create some projects to showcase on my portfolio",
-        "create todo list"
+        {
+            id: "something",
+            text: "bhbjcmdk cdc c cdcdcd cdcdcd cdcdcdc cdcdcdcdcd cdcd cdcdcdc cdcdcdc cdcdcdc cdcdcdcd cdcdcdcd cdcdcdcd cdcdcd"
+        },
+        {
+            id: "1",
+            text: "create a portfolio",
+        },
+        {
+            id: "2",
+            text: "create some projects to showcase on my portfolio",
+        },
+        {
+            id: "3",
+            text: "create todo list"
+        },
     ],
     inprogress: [
-        "creating a todo list"
+        {
+            id: "4",
+            text: "creating a todo list",
+        }
     ],
     done: [
-        "created portfolio"
+        {
+            id: "5",
+            text: "created portfolio",
+        }   
     ]
 }
 
