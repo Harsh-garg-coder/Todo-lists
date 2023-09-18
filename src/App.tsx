@@ -3,7 +3,7 @@ import { data, listArray } from "./config"
 import DeleteModal from "./components/DeleteModal";
 import { v4 as uuidv4 } from 'uuid';
 import ListCard from "./components/ListCard";
-import { Droppable, Draggable, DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { toast } from "react-toastify";
 
 
