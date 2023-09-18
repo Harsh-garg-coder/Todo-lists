@@ -78,12 +78,12 @@ function App() {
       }
 
       if(sourceDroppableId === "todo" && destDroppableId === "done") {
-        toast.error("you can't move a task from todo to done!");
+        toast.error("You can't move a task from Todo to Done directly!");
         return;
       }
 
       if(sourceDroppableId === "done" && destDroppableId === "todo") {
-        toast.error("You can't move a task directly from Done to Todo!");
+        toast.error("You can't move a task from Done to Todo directly!");
         return;
       }
       type ListType = "todo" | "inprogress" | "done";

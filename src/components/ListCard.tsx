@@ -47,8 +47,8 @@ export default function ListCard(props: ListCardProps) {
                             className = {snapshot.isDraggingOver ? "bg-blue-900" : ""}
                         >
                             <div className = "flex gap-3 bg-black-200 py-3 px-4 rounded-md items-center">
-                                <span className = "text-xl">{props.heading}</span>
-                                <span className = "flex justify-center items-center bg-white-200 text-black-400 w-4 h-4 rounded-full text-sm">
+                                <span className = "text-2xl">{props.heading}</span>
+                                <span className = "flex justify-center items-center bg-white-200 text-black-400 w-5 h-5 rounded-full">
                                     {props.cardCount}
                                 </span>
                             </div>
