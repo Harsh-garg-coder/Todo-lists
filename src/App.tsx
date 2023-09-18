@@ -110,14 +110,14 @@ function App() {
           className = "w-11/12 max-w-[700px] flex flex-col items-center sm:flex-row sm:justify-center gap-5 mb-12 border-2 border-white-300 mx-auto p-5 rounded-md"
         >
           <input 
-            className = "w-11/12 sm:w-[400px] py-3 px-5 text-black-400 outline-0 rounded-md" 
+            className = "w-11/12 sm:w-[400px] py-3 px-5 text-black-400 outline-0 rounded-md text-lg" 
             type = "text"
             value = {newTodoText}
             onChange = {(e) => setNewTodoText(e.target.value)}
           />
 
           <button 
-            className = "bg-white-100 text-black-400 py-3 px-5 rounded-md font-semibold" 
+            className = "bg-white-100 text-black-400 py-3 px-5 rounded-md font-semibold text-xl" 
             type = "submit"
           >Create Todo</button>
         </form>

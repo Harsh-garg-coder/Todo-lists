@@ -158,10 +158,10 @@ export default function TodoCard(props: TodoCardProps) {
                             <textarea
                                 value = {props.newValueOfTodosGettingEdited?.[props.currentTodo.id].text}
                                 onChange = {handleChangeInTodoText}
-                                className = "w-full outline-none bg-transparent border border-white-300 rounded-md px-2 py-1"
+                                className = "w-full outline-none bg-transparent border border-white-300 rounded-md px-2 py-1 text-lg"
                             />
                             :
-                            <span>{props.currentTodo.text}</span>
+                            <span className = "text-lg">{props.currentTodo.text}</span>
                         }
 
                         <div className = "my-1 flex gap-2 mt-1">
