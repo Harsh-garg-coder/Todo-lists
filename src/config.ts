@@ -1,4 +1,8 @@
-export const data = {
+export const data: {
+    todo: {id: string, text: string}[],
+    inprogress: {id: string, text: string}[],
+    done: {id: string, text: string}[]
+} = {
     todo: [
         {
             id: "1",
