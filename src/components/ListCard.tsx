@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react"
 import TodoCard from "./TodoCard"
+import { Droppable } from "react-beautiful-dnd"
 
 interface ListCardProps {
     heading: string,
@@ -35,34 +36,47 @@ interface ListCardProps {
 export default function ListCard(props: ListCardProps) {
     return (
         <div 
-            className = "w-11/12 md:w-[45%] lg:w-[31%] bg-black-300 rounded-md shadow-md"
+            className = "w-11/12 md:w-[45%] lg:w-[31%] bg-black-300 rounded-md shadow-md border border-white-300"
         >
-            <div className = "flex gap-3 bg-black-200 py-3 px-4 rounded-md items-center">
-                <span>{props.heading}</span>
-                <span className = "flex justify-center items-center bg-white-200 text-black-400 text-xs w-4 h-4 rounded-full">
-                    {props.cardCount}
-                </span>
-            </div>
-
-            <div className = "flex flex-col items-center gap-3 py-5">
+            <Droppable droppableId={props.heading.toLowerCase()}>
                 {
-                    props.cardsData.map((currentTodo, index) => {
-                        return (
-                            <TodoCard
-                                key = {props.heading + "_card_" + index}
-                                currentTodo = {currentTodo}
-                                setShowDeleteModal = {props.setShowDeleteModal}
-                                setTodoToDeleteId = {props.setTodoToDeleteId}
-                                idsOfTodosGettingEdited = {props.idsOfTodosGettingEdited}
-                                setIdsOfTodosGettingEdited = {props.setIdsOfTodosGettingEdited}
-                                newValueOfTodosGettingEdited = {props.newValueOfTodosGettingEdited}
-                                setNewValueOfTodosGettingEdited = {props.setNewValueOfTodosGettingEdited}
-                                setTodoData = {props.setTodoData}
-                            />
-                        )
-                    })
+                    (provided, snapshot) => (
+                        <div 
+                            ref = {provided.innerRef} 
+                            {...provided.droppableProps}
+                            className = {snapshot.isDraggingOver ? "bg-blue-900" : ""}
+                        >
+                            <div className = "flex gap-3 bg-black-200 py-3 px-4 rounded-md items-center">
+                                <span>{props.heading}</span>
+                                <span className = "flex justify-center items-center bg-white-200 text-black-400 text-xs w-4 h-4 rounded-full">
+                                    {props.cardCount}
+                                </span>
+                            </div>
+                            <div className = "flex flex-col items-center gap-3 py-5">
+                                {
+                                    props.cardsData.map((currentTodo, index) => {
+                                        return (
+                                            <TodoCard
+                                                key = {props.heading + "_card_" + index}
+                                                currentTodo = {currentTodo}
+                                                setShowDeleteModal = {props.setShowDeleteModal}
+                                                setTodoToDeleteId = {props.setTodoToDeleteId}
+                                                idsOfTodosGettingEdited = {props.idsOfTodosGettingEdited}
+                                                setIdsOfTodosGettingEdited = {props.setIdsOfTodosGettingEdited}
+                                                newValueOfTodosGettingEdited = {props.newValueOfTodosGettingEdited}
+                                                setNewValueOfTodosGettingEdited = {props.setNewValueOfTodosGettingEdited}
+                                                setTodoData = {props.setTodoData}
+                                                index = {index}
+                                            />
+                                        )
+                                    })
+                                }
+                            </div>
+                            {provided.placeholder}
+                        </div>
+                    )
                 }
-            </div>
+            </Droppable>
         </div>
     )
 }

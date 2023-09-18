@@ -3,6 +3,9 @@ import { data, listArray } from "./config"
 import DeleteModal from "./components/DeleteModal";
 import { v4 as uuidv4 } from 'uuid';
 import ListCard from "./components/ListCard";
+import { Droppable, Draggable, DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { toast } from "react-toastify";
+
 
 function App() {
   const [newTodoText, setNewTodoText] = useState("");
@@ -62,7 +65,45 @@ function App() {
     }
   }
   
+  const onDragEnd = (result: DropResult) => {
+    try {
+      const sourceDroppableId = result.source.droppableId;
+      const sourceIndex = result.source.index;
+      
+      const destDroppableId = result.destination?.droppableId;
+      const destIndex = result.destination?.index;
+
+      if(!destDroppableId || destIndex === undefined) {
+        return;
+      }
+
+      if(sourceDroppableId === "todo" && destDroppableId === "done") {
+        toast.error("you can't move a task from todo to done!");
+        return;
+      }
+
+      if(sourceDroppableId === "done" && destDroppableId === "todo") {
+        toast.error("You can't move a task directly from Done to Todo!");
+        return;
+      }
+      type ListType = "todo" | "inprogress" | "done";
+      
+      setTodoData((prevTodoData) => {
+        const newTodoData = JSON.parse(JSON.stringify(prevTodoData));
+
+        const removedTodo = newTodoData[sourceDroppableId as ListType].splice(sourceIndex, 1);
+        newTodoData[destDroppableId as ListType].splice(destIndex, 0, removedTodo[0]);
+
+        return newTodoData;
+      })
+
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
   return (
+    <DragDropContext onDragEnd={onDragEnd}>
       <div className = "bg-black-400 text-white-200 min-h-screen pt-12">
         <form 
           onSubmit = {handleSubmit} 
@@ -111,6 +152,7 @@ function App() {
             />
         }
       </div>
+    </DragDropContext>
   )
 }
 

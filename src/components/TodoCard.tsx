@@ -2,6 +2,7 @@ import { faEdit, faRefresh, faSave, faTrash } from "@fortawesome/free-solid-svg-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ChangeEvent, Dispatch, SetStateAction} from "react"
 import { listArray } from "../config";
+import { Draggable } from "react-beautiful-dnd";
 
 interface TodoCardProps {
     key: string,
@@ -32,7 +33,8 @@ interface TodoCardProps {
             id: string;
             text: string;
         }[];
-    }>>
+    }>>,
+    index: number
 }
 
 export default function TodoCard(props: TodoCardProps) {
@@ -142,48 +144,58 @@ export default function TodoCard(props: TodoCardProps) {
     const isEditing = props.idsOfTodosGettingEdited.indexOf(props.currentTodo.id) !== -1;
 
     return (
-        <div 
-            className = "bg-black-100 py-3 px-4 w-11/12 cursor-pointer rounded-md"  
-        >
+        <Draggable key = {props.currentTodo.id} draggableId={props.currentTodo.id} index = {props.index}>
             {
-                isEditing ? 
-                <textarea
-                    value = {props.newValueOfTodosGettingEdited?.[props.currentTodo.id].text}
-                    onChange = {handleChangeInTodoText}
-                    className = "w-full outline-none bg-transparent border border-white-300 rounded-md px-2 py-1"
-                />
-                :
-                <span>{props.currentTodo.text}</span>
-            }
-
-            <div className = "my-1 flex gap-2 mt-1">
-                {
-                    isEditing ? 
-                    <div className = "flex gap-2">
-                        <button 
-                            onClick = {handleSave}
-                        >
-                            <FontAwesomeIcon icon = {faSave} size = "lg" style = {{color: "green"}} />
-                        </button>
-                        <button 
-                            onClick = {handleClickOnRefreshButton}
-                        >
-                            <FontAwesomeIcon icon = {faRefresh} size = "lg" style = {{color: "yellow"}} />
-                        </button>
-                    </div>
-                    :
-                    <button 
-                        onClick = {handleClickOnEditButton}
+                (provided) => (
+                    <div 
+                        className = "bg-black-100 py-3 px-4 w-11/12 cursor-pointer rounded-md"  
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref = {provided.innerRef}
                     >
-                        <FontAwesomeIcon icon = {faEdit} size = "lg" style = {{color: "orange"}} />
-                    </button>
-                }
-                <button>
-                    <FontAwesomeIcon 
-                        onClick = {handleDelete} 
-                        icon = {faTrash} size = "lg" style = {{color: "red"}} />
-                </button>
-            </div>
-        </div>
+                        {
+                            isEditing ? 
+                            <textarea
+                                value = {props.newValueOfTodosGettingEdited?.[props.currentTodo.id].text}
+                                onChange = {handleChangeInTodoText}
+                                className = "w-full outline-none bg-transparent border border-white-300 rounded-md px-2 py-1"
+                            />
+                            :
+                            <span>{props.currentTodo.text}</span>
+                        }
+
+                        <div className = "my-1 flex gap-2 mt-1">
+                            {
+                                isEditing ? 
+                                <div className = "flex gap-2">
+                                    <button 
+                                        onClick = {handleSave}
+                                    >
+                                        <FontAwesomeIcon icon = {faSave} size = "lg" style = {{color: "green"}} />
+                                    </button>
+                                    <button 
+                                        onClick = {handleClickOnRefreshButton}
+                                    >
+                                        <FontAwesomeIcon icon = {faRefresh} size = "lg" style = {{color: "yellow"}} />
+                                    </button>
+                                </div>
+                                :
+                                <button 
+                                    onClick = {handleClickOnEditButton}
+                                >
+                                    <FontAwesomeIcon icon = {faEdit} size = "lg" style = {{color: "orange"}} />
+                                </button>
+                            }
+                            <button>
+                                <FontAwesomeIcon 
+                                    onClick = {handleDelete} 
+                                    icon = {faTrash} size = "lg" style = {{color: "red"}} />
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
+            
+        </Draggable>
     )
 }
